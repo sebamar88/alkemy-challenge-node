@@ -17,7 +17,7 @@ const login = async(email, password) => {
             throw new AppError('Authentication failed! Email / password does not correct.', 401);
         }
 
-        //Validación de usaurio habilitado
+        //Validación de usuario habilitado
         if(!user.enable){
             throw new AppError('Authentication failed! User disabled.', 401);
         }
@@ -29,7 +29,7 @@ const login = async(email, password) => {
         }
 
         //Generar JWT
-        const token = _encrypt(user._id);
+        const token = _encrypt(user.id);
 
         return {
             token,
@@ -59,8 +59,8 @@ const validToken = async (token) => {
         // validar que token sea integro
         let id;
         try {
-             const obj = jwt.verify(token, config.auth.secret);
-             id = obj.id;
+            const obj = jwt.verify(token, config.auth.secret);
+            id = obj.id;
         }catch(verifyError){
             throw new AppError('Authentication failed! Ivalid token', 401, token);
         }
@@ -95,12 +95,22 @@ const validRole = (user, ...roles) => {
     return true;
 }
 
+const register = async(email, password) => {
+
+    const user = {email, password};
+
+    await userService.save(user);
+
+    return "User successfully registered, you can now login to start using the API.";
+}
+
 _encrypt = (id) => {
     return jwt.sign({ id }, config.auth.secret, { expiresIn: config.auth.ttl });
 }
 
 module.exports = {
     login,
+    register,
     validToken,
     validRole
 }

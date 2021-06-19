@@ -1,13 +1,16 @@
 const ExpressServer = require('./server/expressServer');
-const mongooseLoader = require('./mongoose');
+const sequelize = require('./sequelize');
 const config = require('../config');
 const logger = require('./logger');
 
 module.exports = async () => {
 
-    await mongooseLoader();
-    logger.info('DB loaded and connected');
-    
+  
+  try {
+    await sequelize.authenticate();
+    logger.info('DB loaded and connected'); 
+    //sequelize.sync({alter:true});
+    sequelize.sync();
     const server = new ExpressServer();
     logger.info('Express Loaded');
 
@@ -16,5 +19,8 @@ module.exports = async () => {
       Server listening on port: ${config.port}
       #######################################
     `);
+    } catch(error){
+        console.log('No se ha podido contectar la base de datos:', error);
+    } 
 
 }

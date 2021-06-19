@@ -7,7 +7,7 @@ const {validationResult} = require('../commons');
 const { validJWT, hasRole } = require('../auth');
 
 const _nameRequired = check('name', 'Name required').not().isEmpty();
-const _lastNameRequired = check('lastName', 'Last Name required').not().isEmpty();
+//const _lastNameRequired = check('lastName', 'Last Name required').not().isEmpty();
 const _emailRequired = check('email', 'Email required').not().isEmpty();
 const _emailValid = check('email', 'Email is invalid').isEmail();
 const _emailExist = check('email').custom(
@@ -35,10 +35,10 @@ const _roleValid = check('role').optional().custom(
         }
     }
 );
-const _dateValid = check('birthdate').optional().isDate('MM-DD-YYYY');
+//const _dateValid = check('birthdate').optional().isDate('MM-DD-YYYY');
 
 const _idRequied = check('id').not().isEmpty();
-const _idIsMongoDB = check('id').isMongoId();
+//const _idIsMongoDB = check('id').isMongoId();
 const _idExist = check('id').custom(
     async (id = '') => {
         const userFound = await userService.findById(id);
@@ -54,13 +54,13 @@ const postRequestValidations = [
     validJWT,
     hasRole(ADMIN_ROLE),
     _nameRequired,
-    _lastNameRequired,
+    //_lastNameRequired,
     _emailRequired,
     _emailValid,
     _emailExist,
     _passwordRequired,
     _roleValid,
-    _dateValid,
+    //_dateValid,
     validationResult
 ]
 
@@ -68,12 +68,12 @@ const putRequestValidations = [
     validJWT,
     hasRole(ADMIN_ROLE),
     _idRequied,
-    _idIsMongoDB,
+    //_idIsMongoDB,
     _idExist,
     _optionalEmailValid,
     _optionalEmailExist,
     _roleValid,
-    _dateValid,
+    //_dateValid,
     validationResult
 ]
 
@@ -81,7 +81,7 @@ const deleteRequestValidations = [
     validJWT,
     hasRole(ADMIN_ROLE),
     _idRequied,
-    _idIsMongoDB,
+    //_idIsMongoDB,
     _idExist,
     validationResult
 ]
@@ -93,7 +93,7 @@ const getAllRequestValidation = [
 const getRequestValidation = [
     validJWT,
     _idRequied,
-    _idIsMongoDB,
+    //_idIsMongoDB,
     _idExist,
     validationResult
 ]

@@ -1,45 +1,39 @@
-const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
-const mongoosePaginate = require('mongoose-paginate-v2');
+const { model } = require('mongoose');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../loaders/sequelize')
 
-const Schema = mongoose.Schema;
- 
-const userSchema = new Schema({
-        name: {
-            type: String,
-            required: [true, 'Name required']
-        },
-        lastName: {
-            type: String,
-            required: [true, 'Last Name required']
-        },
-        email: {
-            type: String,
-            required: [true, 'Email required'],
-            unique: true,
-            index: true
-        },
-        birthdate: Date,
-        password: {
-            type: String,
-            required: [true, 'Password required']
-        },
-        role: {
-            type: String,
-            required: true,
-            default: 'USER_ROLE',
-            enum: ['USER_ROLE', 'ADMIN_ROLE']
-        }, 
-        enable: {
-            type: Boolean,
-            required: true,
-            default: true
-        }
-    },
-    {timestamps: true}
-);
+const User = sequelize.define('User', {
+  // Model attributes are defined here
+  email: {
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    unique: true   
+  },
+  password: {
+    type: DataTypes.STRING(100),
+    allowNull: false    
+  },
+  name: {
+    type: DataTypes.STRING(50),
+    allowNull: true    
+  },
+  enable: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: true    
+  },
+  role: {
+      type: DataTypes.ENUM({
+        values: ['USER_ROLE', 'ADMIN_ROLE']
+      }),
+      allowNull: false,
+      defaultValue: 'USER_ROLE'
+  }
+}, {
 
-userSchema.plugin(uniqueValidator, {message: 'already exist in the DB'});
-userSchema.plugin(mongoosePaginate);
+});
 
-module.exports = mongoose.model('users', userSchema);
+// `sequelize.define` also returns the model
+console.log(User === sequelize.models.User); // true
+
+module.exports = User;
