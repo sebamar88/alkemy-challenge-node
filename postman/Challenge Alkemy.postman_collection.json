@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "40d1876b-30d2-45a3-9dee-24e903fd8a16",
+		"_postman_id": "76525b41-98c6-4fb4-957d-e6a612fe5a79",
 		"name": "Challenge Alkemy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1320,7 +1320,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{basepath}}/characters?filter[name]=man&filter[age]=40&filter[weigth]=75",
+									"raw": "{{basepath}}/characters?filter[name]=man&filter[age]=40&filter[weight]=75",
 									"host": [
 										"{{basepath}}"
 									],
@@ -1337,7 +1337,7 @@
 											"value": "40"
 										},
 										{
-											"key": "filter[weigth]",
+											"key": "filter[weight]",
 											"value": "75"
 										},
 										{
@@ -2043,7 +2043,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "{{characterId}}"
+											"value": "{{movieId}}"
 										}
 									]
 								}
@@ -2661,11 +2661,11 @@
 									"variable": [
 										{
 											"key": "idMovie",
-											"value": "254"
+											"value": "{{characterId}}"
 										},
 										{
 											"key": "idCharacter",
-											"value": "24"
+											"value": "{{movieId}}"
 										}
 									]
 								}
@@ -2726,7 +2726,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/Fer/Pictures/11792.jpg"
+									"src": "/D:/Descargas/450_1000.jpg"
 								},
 								{
 									"key": "id",
@@ -2795,7 +2795,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/Fer/Pictures/Ktu gAMES.png"
+									"src": "/D:/Descargas/AntMan.jpg"
 								},
 								{
 									"key": "id",

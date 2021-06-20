@@ -39,7 +39,10 @@
                 "schema": {
                   "type": "array",
                   "items": {
+                    "allOf":[{
                     "$ref": "#/components/schemas/User"
+                    }
+                  ]
                   }
                 }
               }
@@ -51,7 +54,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -66,7 +72,10 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserCreateAndUpdate"
+                "allOf":[{
+                    "$ref": "#/components/schemas/UserCreateAndUpdate"
+                    }
+                  ]
               }
             }
           }
@@ -81,7 +90,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/RequestError"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/RequestError"
+                    }
+                  ]
                 }
               }
             }
@@ -92,7 +104,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -112,7 +127,7 @@
             "description": "The id of the user you want to see.",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -124,7 +139,10 @@
                 "schema": {
                   "type": "array",
                   "items": {
+                    "allOf":[{
                     "$ref": "#/components/schemas/User"
+                    }
+                  ]
                   }
                 }
               }
@@ -136,7 +154,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/RequestError"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/RequestError"
+                    }
+                  ]
                 }
               }
             }
@@ -147,7 +168,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -165,7 +189,7 @@
             "description": "The id of the user that needs to be updated.",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -173,7 +197,10 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserCreateAndUpdate"
+                "allOf":[{
+                    "$ref": "#/components/schemas/UserCreateAndUpdate"
+                    }
+                  ]
               }
             }
           }
@@ -185,7 +212,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/User"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/User"
+                    }
+                  ]
                 }
               }
             }
@@ -196,7 +226,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/RequestError"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/RequestError"
+                    }
+                  ]
                 }
               }
             }
@@ -207,7 +240,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -239,7 +275,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/RequestError"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/RequestError"
+                    }
+                  ]
                 }
               }
             }
@@ -250,7 +289,81 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ErrorDB"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{idMovie}/characters/{idCharacter}":{
+      "put": {
+        "tags": ["add characters in movies"],
+        "summary": "Update an existing user by providing the correct id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "idMovie",
+            "in": "path",
+            "description": "The id of the movie that needs to be updated.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "idCharacter",
+            "in": "path",
+            "description": "The id of the character that needs to be added.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Character added to movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/Success"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/RequestError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -260,7 +373,7 @@
     },
     "/characters/image":{
       "post": {
-        "tags": ["characters/image"],
+        "tags": ["/image"],
         "summary": "Upload Character Image.",
         "description": "",
         "requestBody": {
@@ -294,7 +407,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChRequestError"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
                 }
               }
             }
@@ -305,7 +421,71 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/image":{
+      "post": {
+        "tags": ["/image"],
+        "summary": "Upload Movie Image.",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties":{
+                  "id":{
+                    "description": "Movie id",
+                    "type": "integer",
+                    "example": 5
+                  },
+                  "image": {
+                    "description": "Movie image",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Movie image added."
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -315,6 +495,35 @@
     },
     "/characters/": {
       "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filter[name]",
+            "description": "filter characters by name.",
+            "required": false,
+            "Schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[age]",
+            "description": "filter characters by age.",
+            "required": false,
+            "Schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[weight]",
+            "description": "filter characters by weight.",
+            "required": false,
+            "Schema": {
+              "type": "integer"
+            }
+          }
+        ],
         "tags": ["characters"],
         "summary": "Return a list of existing characters",
         "description": "# Service for retrieve characters by parameters with pagination\n - For the pagination, you need send offset and limit parameters.",
@@ -326,7 +535,10 @@
                 "schema": {
                   "type": "array",
                   "items": {
+                    "allOf":[{
                     "$ref": "#/components/schemas/Characters"
+                    }
+                  ]
                   }
                 }
               }
@@ -338,7 +550,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -353,7 +568,10 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CharacterCreateAndUpdate"
+                "allOf":[{
+                    "$ref": "#/components/schemas/CharacterCreateAndUpdate"
+                    }
+                  ]
               }
             }
           }
@@ -368,7 +586,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChRequestError"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
                 }
               }
             }
@@ -379,7 +600,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -411,7 +635,10 @@
                 "schema": {
                   "type": "array",
                   "items": {
+                    "allOf":[{
                     "$ref": "#/components/schemas/Characters"
+                    }
+                  ]
                   }
                 }
               }
@@ -423,7 +650,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChRequestError"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
                 }
               }
             }
@@ -434,7 +664,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -460,7 +693,10 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CharacterCreateAndUpdate"
+                "allOf":[{
+                    "$ref": "#/components/schemas/CharacterCreateAndUpdate"
+                    }
+                  ]
               }
             }
           }
@@ -472,7 +708,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/Characters"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/Characters"
+                    }
+                  ]
                 }
               }
             }
@@ -483,7 +722,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChRequestError"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
                 }
               }
             }
@@ -494,7 +736,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -526,7 +771,10 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChRequestError"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
                 }
               }
             }
@@ -537,7 +785,322 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/ChErrorDB"
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filter[title]",
+            "description": "filter movies by title.",
+            "required": false,
+            "Schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[calification]",
+            "description": "filter movies by calification.",
+            "required": false,
+            "Schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter[creationDate]",
+            "description": "filter movies by creationDate.",
+            "required": false,
+            "Schema": {
+              "type": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "options[order]",
+            "description": "order the query.",
+            "required": false,
+            "Schema": {
+              "type": "order"
+            }
+          }
+        ],
+        "tags": ["movies"],
+        "summary": "Return a list of existing movies",
+        "description": "# Service for retrieve movies by parameters with pagination\n - For the pagination, you need send offset and limit parameters.",
+        "responses": {
+          "200": {
+            "description": "A JSON Array of movies.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf":[{
+                    "$ref": "#/components/schemas/Movies"
+                    }
+                  ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["movies"],
+        "summary": "Create a new character.",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf":[{
+                    "$ref": "#/components/schemas/MovieCreateAndUpdate"
+                    }
+                  ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Character created."
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "get": {
+        "tags": ["movies"],
+        "summary": "Return a list of movies providing an existing id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the movie you want to see.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON Array of movies.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf":[{
+                    "$ref": "#/components/schemas/Movies"
+                    }
+                  ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["movies"],
+        "summary": "Update an existing movie by providing the correct id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the movie that needs to be updated.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf":[{
+                    "$ref": "#/components/schemas/MovieCreateAndUpdate"
+                    }
+                  ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Movie updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/Movies"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["movies"],
+        "summary": "Delete an existing movie by providing the correct id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the movie that needs to be deleted.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie deleted."
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChRequestError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/ChErrorDB"
+                    }
+                  ]
                 }
               }
             }
@@ -691,6 +1254,57 @@
           }
         }
       },
+      "MovieCreateAndUpdate": {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The movie id.",
+            "type": "integer",
+            "example": 25
+          },
+          "image": {
+            "description": "The movie image.",
+            "type": "string",
+            "example": "https://alkemy-nodejs-challenge.s3.us-east-2.amazonaws.com/Antman.jpeg"
+          },
+          "title": {
+            "description": "The movie title.",
+            "type": "string",
+            "example": "Antman"
+          },
+          "creationDate": {
+            "description": "movie release date.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          },
+          "calification": {
+            "description": "The movie calification.",
+            "type": "integer",
+            "example": 4
+          },
+          "createdAt": {
+            "description": "date of the movie creation.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          },
+          "updatedAt": {
+            "description": "date of the movie update.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          },
+          "contentTypeId": {
+            "description": "The movie type of content.",
+            "type": "integer",
+            "example": 45
+          },
+          "genderTypeId": {
+            "description": "The movie type of gender.",
+            "type": "integer",
+            "example": 4
+          }
+        }
+      },
       "CharacterCreateAndUpdate": {
         "required": ["id"],
         "type": "object",
@@ -781,6 +1395,17 @@
             "type": "string",
             "example": "Search failed: description of the error"
           }
+        }
+      },
+      "Success": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "Success Send",
+            "type": "integer",
+            "example": "OK"
+          }
+          
         }
       },
       "ChRequestError": {
