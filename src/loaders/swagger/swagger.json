@@ -1,11 +1,11 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Users and products Api",
-    "description": "## This a api for users and products",
+    "title": "Users & Disney World Api",
+    "description": "## This a api for users and Disney movies and chaarcters",
     "version": "1.0.1",
     "contact": {
-      "email": "gastonm3112@gmail.com"
+      "email": "sebamar88@gmail.com"
     }
   },
 
@@ -28,53 +28,6 @@
   "paths": {
     "/users/": {
       "get": {
-        "parameters": [
-          {
-            "in": "query",
-            "name": "filter[name]",
-            "description": "filter users by name.",
-            "required": false,
-            "Schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[lastName]",
-            "description": "filter users by last name.",
-            "required": false,
-            "Schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter[birthdate]",
-            "description": "filter users by birthdate.",
-            "required": false,
-            "Schema": {
-              "type": "date"
-            }
-          },
-          {
-            "in": "query",
-            "name": "options[limit]",
-            "description": "The limit of users displayed (Use it for pagination).",
-            "required": false,
-            "Schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "options[offset]",
-            "description": "index to start the search of users (Use it for pagination).",
-            "required": false,
-            "Schema": {
-              "type": "string"
-            }
-          }
-        ],
         "tags": ["users"],
         "summary": "Return a list of existing users",
         "description": "# Service for retrieve users by parameters with pagination\n - For the pagination, you need send offset and limit parameters.",
@@ -304,6 +257,293 @@
           }
         }
       }
+    },
+    "/characters/image":{
+      "post": {
+        "tags": ["characters/image"],
+        "summary": "Upload Character Image.",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties":{
+                  "id":{
+                    "description": "Character id",
+                    "type": "integer",
+                    "example": 5
+                  },
+                  "image": {
+                    "description": "Character image",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Character created."
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChRequestError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChErrorDB"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/characters/": {
+      "get": {
+        "tags": ["characters"],
+        "summary": "Return a list of existing characters",
+        "description": "# Service for retrieve characters by parameters with pagination\n - For the pagination, you need send offset and limit parameters.",
+        "responses": {
+          "200": {
+            "description": "A JSON Array of characters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Characters"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChErrorDB"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["characters"],
+        "summary": "Create a new character.",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CharacterCreateAndUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Character created."
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChRequestError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChErrorDB"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/characters/{id}": {
+      "get": {
+        "tags": ["characters"],
+        "summary": "Return a list of characters providing an existing id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the user you want to see.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON Array of characters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Characters"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChRequestError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChErrorDB"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["characters"],
+        "summary": "Update an existing character by providing the correct id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the character that needs to be updated.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CharacterCreateAndUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Character updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Characters"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChRequestError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChErrorDB"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["characters"],
+        "summary": "Delete an existing character by providing the correct id.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the character that needs to be deleted.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Character deleted."
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChRequestError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ChErrorDB"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -322,20 +562,15 @@
             "type": "boolean",
             "example": "true"
           },
-          "_id": {
+          "id": {
             "description": "The user id.",
-            "type": "string",
-            "example": "25acd789def..."
+            "type": "integer",
+            "example": 25
           },
           "name": {
             "description": "The user name.",
             "type": "string",
             "example": "Gastón"
-          },
-          "lastName": {
-            "description": "The user last name.",
-            "type": "string",
-            "example": "Martinez"
           },
           "email": {
             "description": "The user email.",
@@ -347,11 +582,6 @@
             "type": "string",
             "example": "$2b$10$om4Aa5l2.QdSip87EdJM"
           },
-          "birthdate": {
-            "description": "The user birthdate.",
-            "type": "date",
-            "example": "YY-MM-DD -> 1989-12-31"
-          },
           "createdAt": {
             "description": "date of the user creation.",
             "type": "date",
@@ -359,6 +589,144 @@
           },
           "updatedAt": {
             "description": "date of the user update.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          }
+        }
+      },
+      "Characters": {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The character id.",
+            "type": "integer",
+            "example": 25
+          },
+          "image": {
+            "description": "The character image.",
+            "type": "string",
+            "format": "binary"
+          },
+          "name": {
+            "description": "The character name.",
+            "type": "string",
+            "example": "Antman"
+          },
+          "age": {
+            "description": "The character age.",
+            "type": "integer",
+            "example": 35
+          },
+          "history": {
+            "description": "The character history.",
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut augue felis, euismod a sem sit."
+          },
+          "weight": {
+            "description": "The character weight.",
+            "type": "integer",
+            "example": 90
+          },
+          "createdAt": {
+            "description": "date of the character creation.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          },
+          "updatedAt": {
+            "description": "date of the character update.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          }
+        }
+      },
+      "Movies": {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The movie id.",
+            "type": "integer",
+            "example": 25
+          },
+          "image": {
+            "description": "The movie image.",
+            "type": "string",
+            "example": "https://alkemy-nodejs-challenge.s3.us-east-2.amazonaws.com/Antman.jpeg"
+          },
+          "title": {
+            "description": "The movie title.",
+            "type": "string",
+            "example": "Antman"
+          },
+          "creationDate": {
+            "description": "movie release date.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          },
+          "calification": {
+            "description": "The movie calification.",
+            "type": "integer",
+            "example": 4
+          },
+          "createdAt": {
+            "description": "date of the movie creation.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          },
+          "updatedAt": {
+            "description": "date of the movie update.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          },
+          "contentTypeId": {
+            "description": "The movie type of content.",
+            "type": "integer",
+            "example": 45
+          },
+          "genderTypeId": {
+            "description": "The movie type of gender.",
+            "type": "integer",
+            "example": 4
+          }
+        }
+      },
+      "CharacterCreateAndUpdate": {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The character id.",
+            "type": "integer",
+            "example": 25
+          },
+          "name": {
+            "description": "The character name.",
+            "type": "string",
+            "example": "Gastón"
+          },
+          "age": {
+            "description": "The character age.",
+            "type": "integer",
+            "example": 17
+          },
+          "history": {
+            "description": "The character history.",
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut augue felis, euismod a sem sit."
+          },
+          "weight": {
+            "description": "The character weight.",
+            "type": "integer",
+            "example": 90
+          },
+          "createdAt": {
+            "description": "date of the character creation.",
+            "type": "date",
+            "example": "YY-MM-DD -> 1989-12-31"
+          },
+          "updatedAt": {
+            "description": "date of the character update.",
             "type": "date",
             "example": "YY-MM-DD -> 1989-12-31"
           }
@@ -373,11 +741,6 @@
             "type": "string",
             "example": "Gastón"
           },
-          "lastName": {
-            "description": "The user last name.",
-            "type": "string",
-            "example": "Martinez"
-          },
           "email": {
             "description": "The user email.",
             "type": "string",
@@ -387,11 +750,6 @@
             "description": "The user password.",
             "type": "string",
             "example": "Your password"
-          },
-          "birthdate": {
-            "description": "The user birthdate.",
-            "type": "date",
-            "example": "MM-DD-YYY -> 12/31/1989"
           }
         }
       },
@@ -411,6 +769,36 @@
         }
       },
       "ErrorDB": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "integer",
+            "example": "500"
+          },
+          "message": {
+            "description": "Error message",
+            "type": "string",
+            "example": "Search failed: description of the error"
+          }
+        }
+      },
+      "ChRequestError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "integer",
+            "example": "400"
+          },
+          "message": {
+            "description": "Error message",
+            "type": "string",
+            "example": "Validation Errors"
+          }
+        }
+      },
+      "ChErrorDB": {
         "type": "object",
         "properties": {
           "code": {

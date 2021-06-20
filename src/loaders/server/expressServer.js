@@ -14,6 +14,7 @@ class ExpressServer {
         this.basePathAuth = `${config.api.prefix}/auth`;
         this.basePathUser = `${config.api.prefix}/users`;
         this.basePathCharacter = `${config.api.prefix}/characters`;
+        this.basePathMovie = `${config.api.prefix}/movies`;
 
         this._middlewares();
         

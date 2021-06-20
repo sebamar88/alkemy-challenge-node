@@ -1,7 +1,9 @@
 const MovieRepository = require('../repositories/movieRepository');
+const CharacterRepository = require('../repositories/characterRepository');
 const GenderTypeRepository = require('../repositories/genderTypeRepository');
 const ContentTypeRepository = require('../repositories/contentTypeRepository');
 const repository = new MovieRepository();
+const characterRepository = new CharacterRepository();
 const genderTypeRepository = new GenderTypeRepository();
 const contentTypeRepository = new ContentTypeRepository();
 

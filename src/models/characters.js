@@ -35,3 +35,4 @@ Character.belongsToMany(require('./movies'), {
   as: "movies",
   foreignKey: "characterId"
 });
+

@@ -1,8 +1,10 @@
 const CharacterRepository = require('../repositories/characterRepository');
 const repository = new CharacterRepository();
+const ImageRepository = require('../repositories/imageRepository');
+const imageRepository = new ImageRepository();
 
 const findById = async(id) => {
-    return await repository.findById(id);
+    return await repository.findByIdWithMovies(id);
 }
 
 const findByName = async(name) => {
@@ -11,8 +13,7 @@ const findByName = async(name) => {
 
 
 const findAll = async(filter, options) => {
-    //return await repository.findAllWithPagination(filter, options);
-    return await repository.findAll();
+    return await repository.findAll(filter, options);
 }
 
 
@@ -26,6 +27,8 @@ const update = async(id, c) => {
 }
 
 const remove = async(id) => {
+    const c = await repository.findById(id);
+    imageRepository.deleteImage(c.image);
     return await repository.remove(id);
 }
 

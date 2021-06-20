@@ -60,7 +60,7 @@ const updateUser = async (req, res, next) => {
  * @param {express.Request} req 
  * @param {express.Response} res 
  */
-const getById = async (req, res) => {
+const getUserById = async (req, res) => {
     try {
         const user = await userService.findById(req.params.id);
         res.json(new Success(user));
@@ -88,6 +88,6 @@ module.exports = {
     getAllUsers,
     createUser,
     updateUser,
-    getById,
+    getUserById,
     deleteUser
 }

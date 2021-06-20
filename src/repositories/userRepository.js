@@ -12,16 +12,17 @@ class UserRepository {
         return await User.findAll();
     }
 
-/*     async findAllWithPagination(filter, options){
+    /*async findAllWithPagination(filter, options){
         return await User.paginate(filter, options);
-    } */
+    }*/
 
     async findById(id) {
         return await User.findByPk(id);
     }
-    //FIXME Hace query
+    
+    //FIXME Hacer query
     async findByEmail(email) {
-        return await User.findOne({ where: { email } });
+        return await User.findOne({ where: { email } })
     }
 
     async save(user) {
@@ -30,11 +31,11 @@ class UserRepository {
     }
 
     async update(id, user){
-        return await User.update( user, {
+        return await User.update(user, {
             where: {
-                id
+              id
             }
-        })
+          });
     }
 
     async remove(id) {
@@ -43,7 +44,7 @@ class UserRepository {
                 id
             }
         });
-    } 
+    }
 }
 
 module.exports = UserRepository;

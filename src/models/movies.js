@@ -1,4 +1,3 @@
-  
 const { DataTypes } = require('sequelize');
 const sequelize = require('../loaders/sequelize');
 
@@ -18,9 +17,7 @@ const Movie = sequelize.define('Movie', {
     allowNull: false
   },
   calification: {
-    type: DataTypes.ENUM({
-      values: ['1', '2', '3', '4', '5']
-    }),
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 }, {
@@ -46,3 +43,5 @@ Movie.belongsTo(require('./genderTypes'), {
   targetKey: 'id',
   as: 'genderType'
 });
+
+

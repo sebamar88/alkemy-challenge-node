@@ -14,10 +14,10 @@ const login = async(email, password) => {
         const user = await userService.findByEmail(email);
 
         if(!user){
-            throw new AppError('Authentication failed! Email / password does not correct.', 401);
+            throw new AppError('Authentication failed! Email / password does not correct. #1', 401);
         }
 
-        //Validación de usuario habilitado
+        //Validación de usaurio habilitado
         if(!user.enable){
             throw new AppError('Authentication failed! User disabled.', 401);
         }
@@ -25,7 +25,7 @@ const login = async(email, password) => {
         //Validación de password
         const validPassword = await bcrypt.compare(password, user.password);
         if(!validPassword) {
-            throw new AppError('Authentication failed! Email / password does not correct.', 401);
+            throw new AppError('Authentication failed! Email / password does not correct. #2', 401);
         }
 
         //Generar JWT
@@ -59,8 +59,8 @@ const validToken = async (token) => {
         // validar que token sea integro
         let id;
         try {
-            const obj = jwt.verify(token, config.auth.secret);
-            id = obj.id;
+             const obj = jwt.verify(token, config.auth.secret);
+             id = obj.id;
         }catch(verifyError){
             throw new AppError('Authentication failed! Ivalid token', 401, token);
         }
@@ -101,7 +101,10 @@ const register = async(email, password) => {
 
     await userService.save(user);
 
-    return "User successfully registered, you can now login to start using the API.";
+    //TODO: Enviar un mail de confirmación de registro.
+
+    return "User registered. You can log in to use the API.";
+
 }
 
 _encrypt = (id) => {

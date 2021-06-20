@@ -1,5 +1,6 @@
-const bcrypt = require('bcrypt');
+const { Op } = require("sequelize");
 const Character = require('../models/characters');
+const Movie = require('../models/movies');
 
 class CharacterRepository {
 
@@ -7,17 +8,49 @@ class CharacterRepository {
 
     }
 
+    //TODO: implementar filtro de movieTitle
+    async findAll({name, age, weigth, movieTitle}, {limit, offset, order}){
 
-    async findAll(){
-        return await Character.findAll();
+        let where = {};
+        if (name) {
+            where.name = {
+                [Op.like]: `%${name}%`
+            }
+        }
+        if (age) {
+            where.age = {
+                [Op.eq]: age
+            }
+        }
+        if (weigth) {
+            where.weigth = {
+                [Op.eq]: weigth
+            }
+        }
+
+        return await Character.findAll({
+            where,
+            attributes: ['name', 'image'],
+        });
     }
 
     async findById(id) {
         return await Character.findByPk(id);
     }
-    //FIXME Hace query
+    
+    async findByIdWithMovies(id) {
+        return await Character.findByPk(id, {
+            include: [
+              {
+                model: Movie,
+                as: "movies"
+              },
+            ],
+          });
+    }
+    
     async findByName(name) {
-        return await Character.findOne({ where: { name } });
+        return await Character.findOne({ where: { name } })
     }
 
     async save(c) {
@@ -25,11 +58,11 @@ class CharacterRepository {
     }
 
     async update(id, c){
-        return await Character.update( c, {
+        return await Character.update(c, {
             where: {
-                id
+              id
             }
-        })
+          });
     }
 
     async remove(id) {
@@ -38,7 +71,7 @@ class CharacterRepository {
                 id
             }
         });
-    } 
+    }
 }
 
 module.exports = CharacterRepository;

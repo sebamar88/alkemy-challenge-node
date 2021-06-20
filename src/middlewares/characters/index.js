@@ -30,7 +30,7 @@ const _idExist = check('id').custom(
 
 const _historyRequired = check('history').not().isEmpty();
 const _ageIsNumeric = check('age').optional().isNumeric();
-const _weigthIsNumeric = check('weigth').optional().isNumeric();
+const _weightIsNumeric = check('weight').optional().isNumeric();
 const _nameNotExist = check('name').custom(
     async (name = '') => {
         const cFound = await characterService.findByName(name);
@@ -50,7 +50,7 @@ const postRequestValidations = [
     _nameNotExist,
     _ageIsNumeric,
     _historyRequired,
-    _weigthIsNumeric,
+    _weightIsNumeric,
     validationResult
 ]
 
@@ -62,7 +62,7 @@ const putRequestValidations = [
     _idIsNumeric,
     _idExist,
     _ageIsNumeric,
-    _weigthIsNumeric,
+    _weightIsNumeric,
     _roleValid,
     validationResult
 ]
@@ -95,7 +95,7 @@ const postImageRequestValidations = [
     _idRequied,
     _idIsNumeric,
     _idExist,
-    //imageRequired,
+    imageRequired,
     validationResult
 ]
 

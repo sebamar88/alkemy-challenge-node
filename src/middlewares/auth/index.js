@@ -13,7 +13,6 @@ const postLoginRequestValidations = [
     _passwordRequired,
     validationResult
 ]
-
 const postRegisterRequestValidations = [
     _emailRequired,
     _emailValid,

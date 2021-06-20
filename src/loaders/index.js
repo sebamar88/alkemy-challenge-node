@@ -5,16 +5,15 @@ const logger = require('./logger');
 
 module.exports = async () => {
 
-  
   try {
     await sequelize.authenticate();
 
-    //sequelize.sync({alter:true});
+    //sequelize.sync({alter: true});
+    //sequelize.sync({force: true});
     sequelize.sync();
+    logger.info('DB loaded and connected');
+
     
-    logger.info('DB loaded and connected'); 
-
-
     const server = new ExpressServer();
     logger.info('Express Loaded');
 
@@ -23,8 +22,8 @@ module.exports = async () => {
       Server listening on port: ${config.port}
       #######################################
     `);
-    } catch(error){
-        console.log('No se ha podido conectar la base de datos:', error);
-    } 
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
 
 }

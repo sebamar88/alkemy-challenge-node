@@ -62,9 +62,7 @@ class MovieRepository {
     }
 
     async save(m) {
-        return await Movie.create(m, {
-            include: [GenderType]
-        });
+        return await Movie.create(m);
     }
 
     async update(id, m) {

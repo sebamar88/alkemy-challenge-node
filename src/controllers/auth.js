@@ -14,7 +14,6 @@ const login = async(req = request, res = response, next) => {
         next(error);
     }
 
-
 }
 
 const register = async(req = request, res = response, next) => {
@@ -26,7 +25,6 @@ const register = async(req = request, res = response, next) => {
     }catch(error) {
         next(error);
     }
-
 
 }
 

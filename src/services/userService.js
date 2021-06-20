@@ -10,6 +10,7 @@ const findByEmail = async(email) => {
 }
 
 
+//FIXME: Implementar los filtros
 const findAll = async(filter, options) => {
     //return await repository.findAllWithPagination(filter, options);
     return await repository.findAll();

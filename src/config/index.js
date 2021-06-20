@@ -22,15 +22,16 @@ module.exports = {
         host: process.env.DATABASE_HOST,
         username: process.env.DATABASE_USERNAME,
         password: process.env.DATABASE_PASSWORD,
-        name: process.env.DATABASE_NAME,
+        name: process.env.DATABASE_NAME
     },
     auth: {
         secret : process.env.AUTH_SECRET,
         ttl: process.env.AUTH_TTL
     },
     aws: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        privateAccessKey: process.env.AWS_PRIVATE_ACCESS_KEY,
+        accessKeyId : process.env.AWS_ACCESS_KEY_ID,
+        privateAccessKey : process.env.AWS_PRIVATE_ACCESS_KEY,
         s3BucketName : process.env.AWS_S3_BUCKET_NAME
+
     }
 }

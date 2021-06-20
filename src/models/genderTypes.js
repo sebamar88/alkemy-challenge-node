@@ -14,8 +14,10 @@ const GenderType = sequelize.define('GenderType', {
 
 module.exports = GenderType;
 
-const Movie = require('./movies');
-GenderType.hasMany(Movie, {
-  foreignKey: 'genderTypeId',
-  sourceKey: 'id',
-})
+GenderType.hasMany(require('./movies'), {
+  as: 'movies',
+  foreignKey: 'genderTypeId'
+});
+
+
+
