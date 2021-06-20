@@ -26,6 +26,168 @@
     }
   ],
   "paths": {
+    "/auth/login":{
+      "post": {
+        "tags": ["auth"],
+        "summary": "Login to API.",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties":{
+                  "username":{
+                    "description": "Your username",
+                    "type":"string",
+                    "example": "example@email.com"
+                  },
+                  "password": {
+                    "description": "You password",
+                    "type": "string",
+                    "example": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Login Success.",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type": "object",
+                  "properties":{
+                    "status":{
+                      "description": "Login Status",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "description": "Login",
+                      "type": "object",
+                      "properties":{
+                        "token":{
+                          "description": "Login Auth Token",
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjI0MjI3OTc0LCJleHAiOjE2MjQzMTQzNzR9.A6RCYh17zMbjRRBq7Zc0Ku2t4mtrqAhZEgrQyo0_IvM"
+                        },
+                        "user": {
+                          "description": "User name",
+                          "type": "string",
+                          "example": "Sebastián"
+                        },
+                        "role": {
+                          "description": "User role",
+                          "type": "string",
+                          "example": "ADMIN_ROLE"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/LoginInvalidCredentials"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/LoginInvalidRequest"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register":{
+      "post": {
+        "tags": ["auth"],
+        "summary": "Registering to API.",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties":{
+                  "username":{
+                    "description": "Your username",
+                    "type":"string",
+                    "example": "example@email.com"
+                  },
+                  "password": {
+                    "description": "You password",
+                    "type": "string",
+                    "example": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Register Success.",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type": "object",
+                  "properties":{
+                    "status":{
+                      "description": "Register Status",
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "description": "Register",
+                      "type": "string",
+                      "example": "User registered. You can log in to use the API."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message in JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf":[{
+                    "$ref": "#/components/schemas/RegisterInvalidRequest"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/": {
       "get": {
         "tags": ["users"],
@@ -1435,6 +1597,103 @@
             "description": "Error message",
             "type": "string",
             "example": "Search failed: description of the error"
+          }
+        }
+      },
+      "LoginInvalidCredentials": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "integer",
+            "example": "401"
+          },
+          "message": {
+            "description": "Error message",
+            "type": "string",
+            "example": "Authentication failed! Email / password does not correct. #1"
+          }
+        }
+      },
+      "RegisterInvalidRequest":{
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "integer",
+            "example": "400"
+          },
+          "message": {
+            "description": "Error message",
+            "type": "string",
+            "example": "Validation Error"
+          },
+          "details": {
+            "description": "Error details",
+            "type":"object",
+            "properties": {
+              "value": {
+                "description": "Detail value",
+                "type": "string",
+                "example": "prueba"
+              },
+              "msg": {
+                "description": "Detail message",
+                "type": "string",
+                "example": "Email is invalid"
+              },
+              "param": {
+                "description": "Detail params",
+                "type":"string",
+                "example": "email"
+              },
+              "location": {
+                "description": "Detail location",
+                "type":"string",
+                "example": "body"
+              }
+            }
+          }
+        }
+      },
+      "LoginInvalidRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "integer",
+            "example": "400"
+          },
+          "message": {
+            "description": "Error message",
+            "type": "string",
+            "example": "Validation Error"
+          },
+          "details": {
+            "description": "Error details",
+            "type":"object",
+            "properties": {
+              "value": {
+                "description": "Detail value",
+                "type": "string",
+                "example": "NotIsAEmail"
+              },
+              "msg": {
+                "description": "Detail message",
+                "type": "string",
+                "example": "Email is invalid"
+              },
+              "param": {
+                "description": "Detail params",
+                "type":"string",
+                "example": "email"
+              },
+              "location": {
+                "description": "Detail location",
+                "type":"string",
+                "example": "body"
+              }
+            }
           }
         }
       }
