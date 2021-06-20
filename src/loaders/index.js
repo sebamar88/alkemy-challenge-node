@@ -8,9 +8,13 @@ module.exports = async () => {
   
   try {
     await sequelize.authenticate();
-    logger.info('DB loaded and connected'); 
+
     //sequelize.sync({alter:true});
     sequelize.sync();
+    
+    logger.info('DB loaded and connected'); 
+
+
     const server = new ExpressServer();
     logger.info('Express Loaded');
 
@@ -20,7 +24,7 @@ module.exports = async () => {
       #######################################
     `);
     } catch(error){
-        console.log('No se ha podido contectar la base de datos:', error);
+        console.log('No se ha podido conectar la base de datos:', error);
     } 
 
 }

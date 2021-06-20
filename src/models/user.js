@@ -1,4 +1,3 @@
-const { model } = require('mongoose');
 const { DataTypes } = require('sequelize');
 const sequelize = require('../loaders/sequelize')
 
