@@ -11,12 +11,12 @@
 
   "servers": [
     {
-      "url": "http://localhost:3000/api/v1",
-      "description": "Desarrollo"
-    },
-    {
       "url": "https://alkemychallenge.herokuapp.com/api/v1",
       "description": "Producción"
+    },
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "Desarrollo"
     }
   ],
   "tags": [
