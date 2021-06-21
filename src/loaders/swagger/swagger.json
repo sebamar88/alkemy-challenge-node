@@ -22,7 +22,27 @@
   "tags": [
     {
       "name": "users",
-      "description": "Operations about users."
+      "description": "Operations about Users."
+    },
+    {
+      "name": "auth",
+      "description": "Operations about Authentication."
+    },
+    {
+      "name": "add characters in movies",
+      "description": "Operations on addition in the movie-character relationship."
+    },
+    {
+      "name": "characters",
+      "description": "Operations about characters."
+    },
+    {
+      "name": "movies",
+      "description": "Operations about movies."
+    },
+    {
+      "name": "/images",
+      "description": "Operations related to image uploading."
     }
   ],
   "paths": {
