@@ -12,7 +12,7 @@ const _nameRequired = check('name', 'Name required').not().isEmpty();
 const _roleValid = check('role').optional().custom(
     async (role = '') => {
         if(!ROLES.includes(role)) {
-            throw new AppError('Ivalid Role', 400);
+            throw new AppError('Invalid Role', 400);
         }
     }
 );
