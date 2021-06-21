@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Users & Disney World Api",
-    "description": "## This a api for users and Disney movies and chaarcters",
+    "description": "## This an api for users and Disney movies and chaarcters",
     "version": "1.0.1",
     "contact": {
       "email": "sebamar88@gmail.com"
