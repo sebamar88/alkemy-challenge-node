@@ -41,7 +41,7 @@
       "description": "Operations about movies."
     },
     {
-      "name": "/images",
+      "name": "/image",
       "description": "Operations related to image uploading."
     }
   ],
