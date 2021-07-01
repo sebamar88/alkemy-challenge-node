@@ -1,1 +1,1 @@
-# node-08-products
+# Node.Js API with sequalize
